@@ -1,0 +1,74 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.x                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "#time_folder";
+    object      nutSource;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 2 -2 0 0 0 0];
+
+internalField   nonuniform List<scalar> 
+#counter_internal_field
+(
+#values_internal_field
+)
+;
+
+boundaryField
+{
+    inlet
+    {
+        type            fixedValue;
+        value           uniform #value_inlet_value;
+    }
+    secondaryInlet
+    {
+        type            fixedValue;
+        value           uniform #value_inlet_value;
+    }
+    fuelInjector
+    {
+        type            fixedValue;
+        value           uniform #value_inlet_value;
+    }
+    outlet
+    {
+        type            fixedValue;
+        value           uniform #value_top_value;
+    }
+    frontWall
+    {
+        type            fixedValue;
+        value           uniform #value_top_value;
+    }
+    top
+    {
+        type            fixedValue;
+        value           uniform #value_top_value;
+    }
+    back
+    {
+        type            wedge;
+    }
+    front
+    {
+        type            wedge;
+    }
+    axis
+    {
+        type            empty;
+    }
+}
+
+
+// ************************************************************************* //

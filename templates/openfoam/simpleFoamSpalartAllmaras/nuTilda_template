@@ -1,0 +1,71 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.x                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      nuTilda;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 2 -1 0 0 0 0];
+
+internalField   uniform #nuTilda_internalField;
+
+boundaryField
+{
+    inlet
+    {
+        type            fixedValue;
+        value           uniform #nuTilda_inlet;
+    }
+    secondaryInlet
+    {
+        type            fixedValue;
+        value           uniform #nuTilda_inlet;
+    }
+    fuelInjector
+    {
+        type            fixedValue;
+        value           uniform #nuTilda_inlet;
+    }
+
+    outlet
+    {
+        type            zeroGradient;
+    }
+
+    top
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }
+    frontWall
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }
+
+    axis
+    {
+        type            empty;
+    }
+    front
+    {
+        type            wedge;
+    }
+
+    back
+    {
+        type            wedge;
+    }
+
+}
+
+// ************************************************************************* //

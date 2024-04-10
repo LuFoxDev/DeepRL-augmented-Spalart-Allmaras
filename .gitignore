@@ -1,0 +1,13 @@
+*env
+exports
+exports/**
+*.pyc
+logs
+**/__pycache__
+*.png
+**/.directory
+summaries
+saved_summaries
+config_old
+.vscode
+__iodict*
