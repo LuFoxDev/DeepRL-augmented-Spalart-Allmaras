@@ -4,7 +4,6 @@ exports/**
 *.pyc
 logs
 **/__pycache__
-*.png
 **/.directory
 summaries
 saved_summaries

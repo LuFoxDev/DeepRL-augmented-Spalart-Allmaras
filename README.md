@@ -1,9 +1,29 @@
 # Deep Reinforcement Learning augmented Spalart-Allmaras Turbulence Model: Application to a turbulent round jet flow
 
-This repository contains the code that was used for the paper "Deep Reinforcement Learning augmented Spalart-Allmaras Turbulence Model: Application to a turbulent round jet flow" (...) by Lukas M. Fuchs, Jakob G. R. von Saldern, Thomas L. Kaiser and Kilian Oberleithner 
+This repository contains the code that was used for the journal publication 
+
+[Fuchs, L.M.; von Saldern, J.G.R.; Kaiser, T.L.; Oberleithner, K. Deep Reinforcement Learning-Augmented Spalart–Allmaras Turbulence Model: Application to a Turbulent Round Jet Flow. Fluids 2024, 9, 88. https://doi.org/10.3390/fluids9040088 ](https://doi.org/10.3390/fluids9040088)
+
+The purpose of this work is to explore the potential of deep reinforcement learning (DRL) as a black-box optimizer for turbulence model identification. For this, we consider a Reynolds-averaged Navier–Stokes (RANS) closure model of a round turbulent jet flow at a Reynolds number of 10,000. For this purpose, we augment the widely utilized Spalart–Allmaras turbulence model by introducing a source term that is identified by DRL. The algorithm is trained to maximize the alignment of the augmented RANS model velocity fields and time-averaged large eddy simulation (LES) reference data.
+
+The objective of the DRL algorithm is to find a function that maps mean flow quantities to the source term in the Spalart–Allmaras transport equation and that minimizes the difference in velocity fields between the RANS and the reference LES mean field. To identify the 𝛽-function that leads to a good alignment of the RANS solution with the LES mean field, proximal-policy-optimization (ppo) is used. The algorithm is used in a single-step open-loop design. Figure 1 shows an overview of the methodology.
+
+<img src="./img/fluids-09-00088-g004.png" alt="overview of the optimization methodology (Fig.4 in https://doi.org/10.3390/fluids9040088)" width="700"/>
+Figure 1: Overview of the optimization methodology (Figure 4 in Fuchs et. al, 2024)
+
+## Content of the Repository
+This repository contains the following parts: 
+- OpenFOAM source files to modify Spalart-Allmaras Code (`templates/openfoamCore`)
+- OpenFOAM baseline case (Re = 10,000 and 15,000) with and without converged mean fields (initial state) (`templates/openfoam`)
+- Code to train DRL algorithm (`run_training.py`)
+- Code to rerun baseline simulation (`baseline_run.py`)
+- Code to run a pretrained agent (for example for extrapolation tests) (`run_pretrained_agent.py`)
+
+The repository does not contain the LES mean field reference data that is required to fully run the code. It can only be made available upon request. 
+
 
 ## Requirements:
-To fully run the training to replicate the data published in Fuchs et. al you need three components: 
+To fully run the training to replicate the data published in Fuchs et. al, 2024 you need three components: 
 
 1. OpenFOAM: The code was developed using OpenFOAM version 4.X. https://openfoamwiki.net/index.php/Installation/Linux/OpenFOAM-4.x/Ubuntu#Ubuntu_18.04. If other Openfoam versions are used the code and templates (open foam case as well as openfoam source files) need to be adjusted. The openFoam Case files can be found here: `templates/openfoam`, the openfoam source files (that need to be compiled) are here: `templates/openfoamCore`
 2. Reference Data: The mean field data that is used in the publication can be made available upon request. 
